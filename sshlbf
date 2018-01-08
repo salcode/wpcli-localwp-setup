@@ -8,8 +8,21 @@ set -e
 # Looking at our current directory here on our host machine,
 # find the equivalent directory within the guest machine.
 host_machine_path=$(pwd);
+
 # http://stackoverflow.com/questions/19482123/extract-part-of-a-string-using-bash-cut-split
-guest_machine_path="/app/public/"${host_machine_path##*/app/public/}; 
+# Remove first part of host_machine_path (keep only anything after "/app/").
+path_after_app=${host_machine_path#*/app/};
+
+# If "/app/" does not appear in host_machine_path, these will be equal.
+if [ "${host_machine_path}" = "${path_after_app}" ]
+then
+	# "/app/" is not found in $host_machine_path, we use a default.
+	guest_machine_path="/app";
+else
+	# "/app/" is found in $host_machine_path, we use what comes after it
+	# to populate our path for the guest machine.
+	guest_machine_path="/app/${path_after_app}";
+fi
 
 # Find the docker container id (stored in .dockerid).
 
