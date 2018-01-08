@@ -58,3 +58,4 @@ do
 	fi
 	dir="$(dirname "$dir")"
 done
+echo "Failed to SSH in. No .dockerid file was found.";
