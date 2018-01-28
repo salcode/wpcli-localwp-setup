@@ -3,17 +3,28 @@
 # Setup files for using WP CLI from host machine.
 # See https://github.com/salcode/ssh-into-local-by-flywheel/issues/5
 
+# When tput is present, set colors.
+if [[ ! -z $(which tput 2>/dev/null) ]]; then
+	normal=$(tput sgr0)
+	bold=$(tput bold)
+	red=$(tput setaf 1)
+	green=$(tput setaf 2)
+	yellow=$(tput setaf 3)
+	magenta=$(tput setaf 5)
+	cyan=$(tput setaf 6)
+fi
+
 __wpcli_lbf_setup__show_help() {
 	cat <<HELP
 
-USAGE: ${normal}
+${bold} USAGE: ${normal}
 	wpcli-lbf-setup [--help|-h] [--force|-f]
 
-OPTIONS:
+${bold} OPTIONS: ${normal}
 	--help,  -h        Show this help and usage
 	--force, -f        Overwrite previously created configuration files
 
-EXAMPLES:
+${bold} EXAMPLES: ${normal}
 
 	wpcli-lbf-setup
 
@@ -40,33 +51,33 @@ php_path=$(pwd)/wp-cli.local.php;
 
 if [ -f $yml_path ]; then
 	if [ ${force} -eq 1 ]; then
-		echo "Will overwrite existing wp-cli.local.yml";
+		echo "${magenta}Will overwrite existing wp-cli.local.yml${normal}";
 	else
-		echo "Aborting: wp-cli.local.yml already exists"
+		echo "${red}Aborting: wp-cli.local.yml already exists${normal}"
 		exit 1;
 	fi
 fi
 
 if [ -f $php_path ]; then
 	if [ ${force} -eq 1 ]; then
-		echo "Will overwrite existing wp-cli.local.php";
+		echo "${magenta}Will overwrite existing wp-cli.local.php${normal}";
 	else
-		echo "Aborting: wp-cli.local.php already exists"
+		echo "${red}Aborting: wp-cli.local.php already exists"${normal}
 		exit 1;
 	fi
 fi
 
-printf "Database host [192.168.94.100]: "
+printf "Database host [${yellow}192.168.94.100${normal}]: "
 read -r host
 host=${host:-192.168.94.100}
 echo
 
-printf "Database port [4002]: "
+printf "Database port [${yellow}4002${normal}]: "
 read -r port
 port=${port:-4002}
 echo
 
-echo "Creating ${yml_path}"
+echo "${cyan}Creating...${normal} ${yml_path}"
 echo
 cat >${yml_path} <<EOL
 path: app/public
@@ -74,7 +85,7 @@ require:
   - wp-cli.local.php
 EOL
 
-echo "Creating ${php_path}"
+echo "${cyan}Creating...${normal} ${php_path}"
 echo
 cat >${php_path} <<EOL
 <?php
@@ -91,9 +102,11 @@ siteurl=`wp option get siteurl 2> /dev/null`
 
 if [ $? -ne 0 ]
 then
-  echo "Could not connect, please re-check your database settings."
+  echo "${red}Could not connect, please re-check your database settings.${normal}"
+  echo
   exit 1
 fi
 
-echo "Successfully connected to ${siteurl}"
+echo "${green}Successfully connected to ${siteurl}${normal}"
+echo
 exit 0
