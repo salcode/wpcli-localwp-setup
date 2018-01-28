@@ -3,17 +3,36 @@
 # Setup files for using WP CLI from host machine.
 # See https://github.com/salcode/ssh-into-local-by-flywheel/issues/5
 
+force=0
+while [ ! $# -eq 0 ]
+do
+	case "$1" in
+		--force | -f)
+			force=1
+			;;
+	esac
+	shift
+done
+
 yml_path=$(pwd)/wp-cli.local.yml;
 php_path=$(pwd)/wp-cli.local.php;
 
 if [ -f $yml_path ]; then
-    echo "Aborting: wp-cli.local.yml already exists"
-	exit 1;
+	if [ ${force} -eq 1 ]; then
+		echo "Will overwrite existing wp-cli.local.yml";
+	else
+		echo "Aborting: wp-cli.local.yml already exists"
+		exit 1;
+	fi
 fi
 
 if [ -f $php_path ]; then
-    echo "Aborting: wp-cli.local.php already exists"
-	exit 1;
+	if [ ${force} -eq 1 ]; then
+		echo "Will overwrite existing wp-cli.local.php";
+	else
+		echo "Aborting: wp-cli.local.php already exists"
+		exit 1;
+	fi
 fi
 
 printf "Database host [192.168.94.100]: "
