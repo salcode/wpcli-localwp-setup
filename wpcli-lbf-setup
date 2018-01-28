@@ -3,12 +3,33 @@
 # Setup files for using WP CLI from host machine.
 # See https://github.com/salcode/ssh-into-local-by-flywheel/issues/5
 
+__wpcli_lbf_setup__show_help() {
+	cat <<HELP
+
+USAGE: ${normal}
+	wpcli-lbf-setup [--help|-h] [--force|-f]
+
+OPTIONS:
+	--help,  -h        Show this help and usage
+	--force, -f        Overwrite previously created configuration files
+
+EXAMPLES:
+
+	wpcli-lbf-setup
+
+HELP
+}
+
 force=0
 while [ ! $# -eq 0 ]
 do
 	case "$1" in
 		--force | -f)
 			force=1
+			;;
+		--help | -h)
+			__wpcli_lbf_setup__show_help
+			exit 0
 			;;
 	esac
 	shift
