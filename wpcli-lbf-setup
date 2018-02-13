@@ -49,7 +49,7 @@ done
 yml_path=$(pwd)/wp-cli.local.yml;
 php_path=$(pwd)/wp-cli.local.php;
 
-if [ -f $yml_path ]; then
+if [ -f "$yml_path" ]; then
 	if [ ${force} -eq 1 ]; then
 		echo "${magenta}Will overwrite existing wp-cli.local.yml${normal}";
 	else
@@ -58,7 +58,7 @@ if [ -f $yml_path ]; then
 	fi
 fi
 
-if [ -f $php_path ]; then
+if [ -f "$php_path" ]; then
 	if [ ${force} -eq 1 ]; then
 		echo "${magenta}Will overwrite existing wp-cli.local.php${normal}";
 	else
@@ -79,7 +79,7 @@ echo
 
 echo "${cyan}Creating...${normal} ${yml_path}"
 echo
-cat >${yml_path} <<EOL
+cat >"${yml_path}" <<EOL
 path: app/public
 require:
   - wp-cli.local.php
@@ -87,7 +87,7 @@ EOL
 
 echo "${cyan}Creating...${normal} ${php_path}"
 echo
-cat >${php_path} <<EOL
+cat >"${php_path}" <<EOL
 <?php
 define('DB_HOST', '${host}:${port}');
 define('DB_USER', 'root');
