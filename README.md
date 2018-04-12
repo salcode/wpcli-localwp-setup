@@ -11,6 +11,49 @@ Instead, I'd prefer a command I can type from the command line that would:
 
 The `sshlbf` (for SSH Local by Flywheel) does this task based on a file called `.dockerid` that needs to be manually created in the root directory for that particular site.  The `.dockerid` file should contain one line that has the container name for that site.
 
+## General Setup
+
+### Download this Project
+
+Copy this project to your local machine.  I use Git to make a copy of the project
+in my home directory into a new directory called `ssh-into-local-by-flywheel`.
+
+```
+$ cd ~
+$ git clone git@github.com:salcode/ssh-into-local-by-flywheel.git
+```
+
+### Add these Commands to Our Path
+
+To use these new commands, `sshlbf` and `wpcli-lbf-setup`, we need to add our directory
+to our PATH environment variable. If you're not familiar with PATH and environment
+variables, I suggest reading this StackExchange entry
+[What are PATH and other environment variables, and how can I set or use them?](https://superuser.com/q/284342).
+
+We are going to add the following lines to `~/.bash_profile`.
+
+```
+# Prepend this directory to the PATH environment variable.
+# See https://superuser.com/q/284342
+export PATH=~/ssh-into-local-by-flywheel:$PATH
+```
+
+Then exit your terminal and start it once again.
+
+Now if you type
+
+```
+$ sshlbf
+```
+
+you should get the message
+
+> Failed to SSH in. No .dockerid file was found.
+
+This is a good thing, as it means `sshlbf` is working properly.
+
+Now we need to configure our individual sites.
+
 ## Setup WP CLI from Host Machine
 
 Much of my command line work that requires SSHing into the machine specifically involves using [WP CLI](http://wp-cli.org/). Thanks to work by [Morgan Estes](https://github.com/morganestes), I found I could add some configuration files to my local project that would allow me to use WP CLI from my Mac on the WordPress site running inside Local by Flywheel.
