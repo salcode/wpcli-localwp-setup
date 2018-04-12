@@ -7,9 +7,10 @@ Instead, I'd prefer a command I can type from the command line that would:
 - Based on the directory I'm currently in, SSH into the correct docker container.
 - Based on the directory I'm currently in, within the docker container change to the corresponding directory.
 
-## SSH Script
+This project includes a script called `sshlbf`, which does this.
 
-The `sshlbf` (for SSH Local by Flywheel) does this task based on a file called `.dockerid` that needs to be manually created in the root directory for that particular site.  The `.dockerid` file should contain one line that has the container name for that site.
+Additionally, I would like to be able to use [WP CLI](https://wp-cli.org) without SSHing in at all.
+This project includes a setup script to make this possible (`wpcli-lbf-setup`).
 
 ## General Setup
 
