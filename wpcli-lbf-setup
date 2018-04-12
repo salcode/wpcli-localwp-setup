@@ -93,8 +93,9 @@ define('DB_HOST', '${host}:${port}');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 
-error_reporting(0);
-@ini_set('display_errors', 0);
+// Only display fatal run-time errors.
+// See http://php.net/manual/en/errorfunc.constants.php.
+error_reporting(1);
 define( 'WP_DEBUG', false );
 EOL
 
