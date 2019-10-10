@@ -103,7 +103,7 @@ siteurl=`wp option get siteurl 2> /dev/null`
 
 if [ $? -ne 0 ]
 then
-  echo "${red}Could not connect, please re-check your database settings.${normal}"
+  echo "${red}Could not connect, please re-check your database settings and confirm you're in the correct directory.${normal}"
   echo
   exit 1
 fi
