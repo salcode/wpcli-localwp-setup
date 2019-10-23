@@ -105,12 +105,6 @@ if [ $? -ne 0 ]
 then
   echo "${red}Could not connect, please re-check your database settings. Also check you're in the correct directory.${normal}"
   echo
-  echo "${yellow}Removing..${normal} ${yml_path}"
-  echo
-  rm "$yml_path";
-  echo "${yellow}Removing..${normal} ${php_path}"
-  echo
-  rm "$php_path";
   exit 1
 fi
 
