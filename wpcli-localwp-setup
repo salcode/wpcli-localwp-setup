@@ -87,7 +87,7 @@ define('DB_HOST', 'localhost:${socket}');
 
 // Only display fatal run-time errors.
 // See http://php.net/manual/en/errorfunc.constants.php.
-error_reporting(1);
+error_reporting(E_ERROR);
 
 // Disable WordPress debug mode.
 // See https://codex.wordpress.org/WP_DEBUG.
