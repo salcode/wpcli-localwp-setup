@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Setup files for using WP CLI from host machine.
-# See https://github.com/salcode/ssh-into-local-by-flywheel/issues/5
+# Setup files for using WP CLI from LocalWP directory.
+# See https://salferrarello.com/wp-cli-local-by-flywheel-without-ssh/
 
 # When tput is present, set colors.
 if [[ ! -z $(which tput 2>/dev/null) ]]; then
@@ -14,11 +14,11 @@ if [[ ! -z $(which tput 2>/dev/null) ]]; then
 	cyan=$(tput setaf 6)
 fi
 
-__wpcli_lbf_setup__show_help() {
+__wpcli_localwp_setup__show_help() {
 	cat <<HELP
 
 ${bold} USAGE: ${normal}
-	wpcli-lbf-setup [--help|-h] [--force|-f]
+	wpcli-localwp-setup [--help|-h] [--force|-f]
 
 ${bold} OPTIONS: ${normal}
 	--help,  -h        Show this help and usage
@@ -26,7 +26,7 @@ ${bold} OPTIONS: ${normal}
 
 ${bold} EXAMPLES: ${normal}
 
-	wpcli-lbf-setup
+	wpcli-localwp-setup
 
 HELP
 }
@@ -39,7 +39,7 @@ do
 			force=1
 			;;
 		--help | -h)
-			__wpcli_lbf_setup__show_help
+			__wpcli_localwp_setup__show_help
 			exit 0
 			;;
 	esac
