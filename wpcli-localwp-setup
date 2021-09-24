@@ -67,14 +67,8 @@ if [ -f "$php_path" ]; then
 	fi
 fi
 
-printf "Database host [${yellow}192.168.94.100${normal}]: "
-read -r host
-host=${host:-192.168.94.100}
-echo
-
-printf "Database port [${yellow}4002${normal}]: "
-read -r port
-port=${port:-4002}
+printf "Database Socket: "
+read -r socket
 echo
 
 echo "${cyan}Creating...${normal} ${yml_path}"
@@ -89,9 +83,7 @@ echo "${cyan}Creating...${normal} ${php_path}"
 echo
 cat >"${php_path}" <<EOL
 <?php
-define('DB_HOST', '${host}:${port}');
-define('DB_USER', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_HOST', 'localhost:${socket}');
 
 // Only display fatal run-time errors.
 // See http://php.net/manual/en/errorfunc.constants.php.
@@ -103,7 +95,7 @@ siteurl=`wp option get siteurl 2> /dev/null`
 
 if [ $? -ne 0 ]
 then
-  echo "${red}Could not connect, please re-check your database settings and confirm you're in the correct directory.${normal}"
+  echo "${red}Could not connect, please re-check your database socket and confirm you're in the correct directory.${normal}"
   echo
   exit 1
 fi
