@@ -15,7 +15,7 @@ in my home directory into a new directory called `wpcli-localwp-setup`.
 
 ```
 $ cd ~
-$ git clone git@github.com:salcode/ssh-into-local-by-flywheel.git wpcli-localwp-setup
+$ git clone git@github.com:salcode/wpcli-localwp-setup.git
 ```
 
 ### Add these Commands to Our Path
