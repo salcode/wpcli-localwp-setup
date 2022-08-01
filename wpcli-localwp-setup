@@ -83,7 +83,10 @@ echo "${cyan}Creating...${normal} ${php_path}"
 echo
 cat >"${php_path}" <<EOL
 <?php
-define('DB_HOST', 'localhost:${socket}');
+
+if ('/Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/config.yaml' !== getenv('WP_CLI_CONFIG_PATH')){
+    define('DB_HOST', 'localhost:${socket}');
+}
 
 // Only display fatal run-time errors.
 // See http://php.net/manual/en/errorfunc.constants.php.
